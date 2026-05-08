@@ -166,6 +166,18 @@ Set task `state` back to `in_progress` and increment a `review_cycles` counter i
 ```
 
 2. Set extract task `state` → `done`
+3. Post a status message notifying the Spec Writer:
+
+```json
+{
+  "id": "{N}",
+  "from": "reviewer",
+  "to": ["spec-writer"],
+  "at": "{ISO-timestamp}",
+  "type": "info",
+  "text": "EX-001: draft approved for accordion-web. Synthesize task SY-001 is ready for pickup."
+}
+```
 
 ### If cycle limit reached (10 cycles)
 
