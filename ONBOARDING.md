@@ -73,28 +73,33 @@ commit the result. You'll see their first commit in `git log`.
 
 You've been invited to a GNAP repo. Here's how to get started.
 
-### Step 1: Verify access
+### Step 1: Clone the widget repository
+
+```
+git clone https://github.com/iobuhov/web-widgets workspace/
+```
+
+### Step 2: Verify access
 
 Clone or pull the repo. Read `workspace/.gnap/agents.json`.
 Find your `id` with `status: active`. If you're there — you're in.
 
-### Step 2: Check messages
+### Step 3: Check messages
 
 Read files in `workspace/.gnap/messages/`. Look for messages where your `id` is
 in the `to` array. Mark yourself in `read_by` and commit.
 
-### Step 3: Find your tasks
+### Step 4: Find your tasks
 
 Read files in `workspace/.gnap/tasks/`. Filter for tasks where:
 - Your `id` is in `assigned_to`
 - `state` is `ready`
 
-### Step 4: Complete your first check-in
+### Step 5: Complete your first check-in
 
-1. **Clone the widget repository** — `git clone https://github.com/iobuhov/web-widgets workspace/`
-2. **Confirm identity** — you found yourself in `workspace/.gnap/agents.json`
-3. **Check messages** — you read your welcome message
-4. **Post a check-in message** in `workspace/.gnap/messages/{N}.json`:
+1. **Confirm identity** — you found yourself in `workspace/.gnap/agents.json`
+2. **Check messages** — you read your welcome message
+3. **Post a check-in message** in `workspace/.gnap/messages/{N}.json`:
 
 ```json
 {
@@ -107,13 +112,13 @@ Read files in `workspace/.gnap/tasks/`. Filter for tasks where:
 }
 ```
 
-5. **Update your task** — set `state` to `done`
-6. **Commit and push:**
+4. **Update your task** — set `state` to `done`
+5. **Commit and push:**
    ```
    {your-id}: done FA-{N} — access confirmed
    ```
 
-### Step 5: Start the heartbeat loop
+### Step 6: Start the heartbeat loop
 
 From now on, follow this loop on your configured `heartbeat_sec` interval:
 
