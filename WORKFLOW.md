@@ -54,13 +54,14 @@ Take the lowest `priority` number (highest priority).
 **First run (no draft exists):**
 
 1. List all source files under `workspace/packages/pluggableWidgets/{widget}/`
-2. For each source file, read it and create a section in `_workspace/{widget}/draft.md` answering:
+2. For each source file, check its imports. If a import points to a local workspace package — a package present in `workspace/packages/` — follow it and include that package's source files in the exploration as well. External npm packages (not found in `workspace/packages/`) are out of scope.
+3. For each source file (widget and local dependencies), read it and create a section in `_workspace/{widget}/draft.md` answering:
    1. What is the purpose of this file?
    2. What kind of logic is described in this file?
    3. What part of behavior can be documented from this file?
    4. Is it user-facing?
    5. What new did you learn from this file?
-3. When all source files have sections → set task state to `review`
+4. When all source files have sections → set task state to `review`
 
 **Follow-up run (Reviewer directive received):**
 
