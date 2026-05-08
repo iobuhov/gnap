@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+> **Before doing anything else, read `ONBOARDING.md` in full.**
+
 ## What This Repo Is
 
 GNAP (Git-Native Agent Protocol) — a specification for coordinating AI agent teams using git as the only transport/storage layer. No server required.
