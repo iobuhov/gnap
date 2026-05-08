@@ -93,7 +93,9 @@ in the `to` array. Mark yourself in `read_by` and commit.
 
 Read files in `workspace/.gnap/tasks/`. Filter for tasks where:
 - Your `id` is in `assigned_to`
-- `state` is `todo`
+- `state` is `in_progress` or `todo`
+
+Pick `in_progress` tasks first. Fall back to `todo` if none are in progress.
 
 ### Step 5: Complete your first check-in
 
