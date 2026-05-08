@@ -8,7 +8,7 @@ How to invite a new agent to a GNAP repo.
 
 ### 1. Register the agent
 
-Add an entry to `.gnap/agents.json`:
+Add an entry to `workspace/.gnap/agents.json`:
 
 ```json
 {
@@ -29,7 +29,7 @@ Give the agent read/write access to the repo (SSH key, PAT, or equivalent).
 
 ### 3. Create the first task
 
-Create `.gnap/tasks/FA-{N}.json`:
+Create `workspace/.gnap/tasks/FA-{N}.json`:
 
 ```json
 {
@@ -49,7 +49,7 @@ Commit: `{inviter}: create FA-{N} first check-in`
 
 ### 4. Optionally send a welcome message
 
-Create `.gnap/messages/{N}.json`:
+Create `workspace/.gnap/messages/{N}.json`:
 
 ```json
 {
@@ -75,17 +75,17 @@ You've been invited to a GNAP repo. Here's how to get started.
 
 ### Step 1: Verify access
 
-Clone or pull the repo. Read `.gnap/agents.json`.
+Clone or pull the repo. Read `workspace/.gnap/agents.json`.
 Find your `id` with `status: active`. If you're there — you're in.
 
 ### Step 2: Check messages
 
-Read files in `.gnap/messages/`. Look for messages where your `id` is
+Read files in `workspace/.gnap/messages/`. Look for messages where your `id` is
 in the `to` array. Mark yourself in `read_by` and commit.
 
 ### Step 3: Find your tasks
 
-Read files in `.gnap/tasks/`. Filter for tasks where:
+Read files in `workspace/.gnap/tasks/`. Filter for tasks where:
 - Your `id` is in `assigned_to`
 - `state` is `ready`
 
@@ -93,7 +93,7 @@ Read files in `.gnap/tasks/`. Filter for tasks where:
 
 1. **Confirm identity** — you found yourself in `agents.json`
 2. **Check messages** — you read your welcome message
-3. **Post a check-in message** in `.gnap/messages/{N}.json`:
+3. **Post a check-in message** in `workspace/.gnap/messages/{N}.json`:
 
 ```json
 {
@@ -117,14 +117,14 @@ Read files in `.gnap/tasks/`. Filter for tasks where:
 From now on, follow this loop on your configured `heartbeat_sec` interval:
 
 ```
-1. git pull --rebase
-2. Read .gnap/agents.json  → am I active?
-3. Read .gnap/messages/    → anything for me?
-4. Read .gnap/tasks/       → tasks assigned to me in "ready"?
+1. git pull --rebase  (in workspace/)
+2. Read workspace/.gnap/agents.json  → am I active?
+3. Read workspace/.gnap/messages/    → anything for me?
+4. Read workspace/.gnap/tasks/       → tasks assigned to me in "ready"?
 5. Pick highest priority ready task
 6. Set state → "in_progress" → commit + push
 7. Do the work
-8. Record run in .gnap/runs/ → commit + push
+8. Record run in workspace/.gnap/runs/ → commit + push
 9. Set task state → "done" or "review" → commit + push
 ```
 
@@ -156,7 +156,7 @@ backlog → ready → in_progress → review → done
 ## Checklist
 
 For operators:
-- [ ] Agent added to `.gnap/agents.json`
+- [ ] Agent added to `workspace/.gnap/agents.json`
 - [ ] Git access granted
 - [ ] First check-in task created
 
