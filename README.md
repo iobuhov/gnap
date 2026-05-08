@@ -221,11 +221,11 @@ A unit of work. One JSON file per task.
 #### Task States
 
 ```
-backlog → ready → in_progress → review → done
+backlog → todo → in_progress → review → done
             ↑          ↑           │
             │          └───────────┘  (reviewer rejects)
             │
-         blocked → ready              (unblocked)
+         blocked → todo              (unblocked)
             ↓
          cancelled
 ```
@@ -233,7 +233,7 @@ backlog → ready → in_progress → review → done
 | State | Meaning |
 |-------|---------|
 | `backlog` | Not yet prioritized |
-| `ready` | Prioritized, waiting for agent to pick up |
+| `todo` | Prioritized, waiting for agent to pick up |
 | `in_progress` | Agent is working on it |
 | `review` | Work done, waiting for review |
 | `done` | Completed (terminal) |
@@ -242,7 +242,7 @@ backlog → ready → in_progress → review → done
 
 Reverse transitions:
 - `review → in_progress` — reviewer rejects, agent reworks
-- `blocked → ready` — unblocked, agent picks up again
+- `blocked → todo` — unblocked, agent picks up again
 
 ---
 

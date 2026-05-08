@@ -34,7 +34,7 @@ Git  (Transport)             — push/pull/commit = the message bus
 
 ## Core Protocol Concepts
 
-**Task states:** `backlog → ready → in_progress → review → done` (also `blocked`, `cancelled`). Reverse transitions: `review → in_progress` (reject), `blocked → ready` (unblocked).
+**Task states:** `backlog → todo → in_progress → review → done` (also `blocked`, `cancelled`). Reverse transitions: `review → in_progress` (reject), `blocked → todo` (unblocked).
 
 **Commit convention:** `<agent-id>: <action> <entity> [details]` — git history IS the audit log.
 

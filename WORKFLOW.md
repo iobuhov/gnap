@@ -32,7 +32,7 @@ State lives in `workspace/.gnap/` and `workspace/_workspace/`. Each agent runs o
 
 Pick up any task where:
 - `assigned_to` includes `worker`
-- `state` is `ready`
+- `state` is `todo`
 
 Take the lowest `priority` number (highest priority).
 
@@ -42,7 +42,7 @@ Take the lowest `priority` number (highest priority).
 1. git pull --rebase  (in workspace/)
 2. Read workspace/.gnap/agents.json  → confirm status: active
 3. Read workspace/.gnap/messages/    → any directives for "worker"?
-4. Read workspace/.gnap/tasks/       → find ready task
+4. Read workspace/.gnap/tasks/       → find todo task
 5. Set task state → "in_progress", commit + push
 6. Execute (see below)
 7. Set task state → "review", commit + push
@@ -155,7 +155,7 @@ Set task `state` back to `in_progress` and increment a `review_cycles` counter i
   "id": "SY-{N}",
   "title": "Write spec: {widget}",
   "assigned_to": ["spec-writer"],
-  "state": "ready",
+  "state": "todo",
   "priority": 1,
   "created_by": "reviewer",
   "created_at": "{ISO-timestamp}",
@@ -212,7 +212,7 @@ reviewer: block EX-001 — 10 cycles exceeded, human review required
 
 Pick up any task where:
 - `assigned_to` includes `spec-writer`
-- `state` is `ready`
+- `state` is `todo`
 - `tags` includes `synthesize`
 
 ### Per-iteration workflow
@@ -283,11 +283,11 @@ spec-writer: done SY-001 — spec written for accordion-web
 ### GNAP States
 
 ```
-backlog → ready → in_progress → review → done
+backlog → todo → in_progress → review → done
             ↑          ↑           │
             │          └───────────┘  (reviewer rejects)
             │
-         blocked → ready              (unblocked)
+         blocked → todo              (unblocked)
             ↓
          cancelled
 ```
@@ -295,7 +295,7 @@ backlog → ready → in_progress → review → done
 | State | Meaning |
 |-------|---------|
 | `backlog` | Not yet prioritized |
-| `ready` | Prioritized, waiting for agent to pick up |
+| `todo` | Prioritized, waiting for agent to pick up |
 | `in_progress` | Agent is working on it |
 | `review` | Work done, waiting for review |
 | `done` | Completed (terminal) |
@@ -304,20 +304,20 @@ backlog → ready → in_progress → review → done
 
 Reverse transitions:
 - `review → in_progress` — reviewer rejects, agent reworks
-- `blocked → ready` — unblocked, agent picks up again
+- `blocked → todo` — unblocked, agent picks up again
 
 ### This Loop
 
 ```
 [extract/EX-NNN]
-  ready → in_progress (Worker)
+  todo → in_progress (Worker)
         → review (Worker, draft complete)
         → in_progress (Reviewer returns for gaps)     ← up to 10 cycles
         → done (Reviewer satisfied)
         → blocked (10 cycles exceeded)
 
 [synthesize/SY-NNN]   created by Reviewer on consensus
-  ready → in_progress (Spec Writer)
+  todo → in_progress (Spec Writer)
         → done
 ```
 

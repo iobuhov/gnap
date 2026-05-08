@@ -115,13 +115,13 @@ One section per source file. Each section answers:
 
 ```
 [extract/{widget}]
-  ready → in_progress (Worker) → review (Reviewer)
+  todo → in_progress (Worker) → review (Reviewer)
                ↑________________________| (gaps found, max 10 cycles)
                                         → done (consensus reached)
                                         → blocked (10 cycles exceeded, human flagged)
 
 [synthesize/{widget}]   (created by Reviewer on consensus)
-  ready → in_progress (Spec Writer) → done
+  todo → in_progress (Spec Writer) → done
 ```
 
 ### Communication
@@ -137,7 +137,7 @@ One section per source file. Each section answers:
 ## Bootstrap Script
 
 A one-time script reads `packages/pluggableWidgets/` from the upstream repo and creates:
-- One `.gnap/tasks/extract/{widget}.json` per widget with `state: ready`
+- One `.gnap/tasks/extract/{widget}.json` per widget with `state: todo`
 - `.gnap/agents.json` with Worker, Reviewer, and Spec Writer agent entries
 
 Re-running the script is idempotent — skips widgets that already have a task.
@@ -148,11 +148,11 @@ Re-running the script is idempotent — skips widgets that already have a task.
 
 Each iteration:
 1. Agent pulls latest git state
-2. Checks GNAP for tasks assigned to it in `state: ready`
+2. Checks GNAP for tasks assigned to it in `state: todo`
 3. Picks next task, sets `state: in_progress`
 4. Does work, commits results
 5. Updates task state, pushes
-6. Loop continues until no `ready` tasks remain
+6. Loop continues until no `todo` tasks remain
 
 **State lives in `.gnap/` and `_workspace/` — fresh agent context each iteration.**
 
