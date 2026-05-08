@@ -26,7 +26,7 @@ State lives in `workspace/.gnap/` and `workspace/_workspace/`. Each agent runs o
 ## Worker
 
 **Heartbeat:** 300s  
-**Owns:** `extract/{widget}` tasks  
+**Handles:** `extract/{widget}` tasks  
 **Writes:** `workspace/_workspace/{widget}/draft.md`
 
 ### Trigger
@@ -180,7 +180,7 @@ reviewer: block EX-001 — 10 cycles exceeded, human review required
 ## Spec Writer
 
 **Heartbeat:** 300s  
-**Owns:** `synthesize/{widget}` tasks  
+**Handles:** `synthesize/{widget}` tasks  
 **Writes:** `workspace/spec-alpha/{widget}.md`
 
 ### Trigger
