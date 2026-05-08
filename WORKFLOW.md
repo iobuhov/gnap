@@ -67,7 +67,20 @@ Take the lowest `priority` number (highest priority).
 1. Read the directive message — it lists specific files or sections needing deeper analysis
 2. Re-read the named files, update the relevant sections in `draft.md`
 3. Mark the directive message as `read_by: ["worker"]`, commit
-4. Set task state back to `review`
+4. Post a status message confirming the gaps were addressed:
+
+```json
+{
+  "id": "{N}",
+  "from": "worker",
+  "to": ["reviewer"],
+  "at": "{ISO-timestamp}",
+  "type": "status",
+  "text": "EX-001: gaps addressed. Updated editorConfig.ts section with behavioral constraints. CHANGELOG v2.3.0 findings added."
+}
+```
+
+5. Set task state back to `review`
 
 ### Commit convention
 
