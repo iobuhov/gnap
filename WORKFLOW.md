@@ -33,10 +33,10 @@ State lives in `workspace/.gnap/` and `workspace/_tmp/`. Each agent runs on a `/
 ```
 1. git pull --rebase  (in workspace/)
 2. Read workspace/.gnap/agents.json  → confirm status: active
-3. Read workspace/.gnap/messages/    → any directives for "worker"?
-4. Read workspace/.gnap/tasks/       → find in_progress task (priority) or todo task
-5. Set task state → "in_progress", commit + push
-6. If directive found in step 3 → execute [Follow-up run], else → execute [First run]
+3. Read workspace/.gnap/tasks/       → find todo task assigned to "worker"
+4. Set task state → "in_progress", commit + push
+5. Read workspace/.gnap/messages/    → any directives for "worker"?
+6. If directive found in step 5 → execute [Follow-up run], else → execute [First run]
 7. Set task state → "review", commit + push
 ```
 
