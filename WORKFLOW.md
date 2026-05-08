@@ -34,7 +34,7 @@ State lives in `workspace/.gnap/` and `workspace/_tmp/`. Each agent runs on a `/
 1. git pull --rebase  (in workspace/)
 2. Read workspace/.gnap/agents.json  → confirm status: active
 3. Read workspace/.gnap/messages/    → any directives for "worker"?
-4. Read workspace/.gnap/tasks/       → find todo task
+4. Read workspace/.gnap/tasks/       → find in_progress task (priority) or todo task
 5. Set task state → "in_progress", commit + push
 6. Execute (see below)
 7. Set task state → "review", commit + push
