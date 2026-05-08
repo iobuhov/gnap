@@ -46,6 +46,7 @@ State lives in `workspace/.gnap/` and `workspace/_tmp/`. Each agent runs on a `/
    5. What new did you learn from this file?
    Each section: max 2 paragraphs, 256 words total.
 9. Set task state → "review", commit + push
+10. Stop — wait for next heartbeat
 ```
 
 ### [Follow-up run] — directive found in messages
@@ -75,6 +76,7 @@ State lives in `workspace/.gnap/` and `workspace/_tmp/`. Each agent runs on a `/
 
 ```
 10. Set task state → "review", commit + push
+11. Stop — wait for next heartbeat
 ```
 
 ### Commit convention
