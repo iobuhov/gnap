@@ -263,8 +263,8 @@ spec-writer: done SY-001 — spec written for accordion-web
 
 ```
 backlog → todo → in_progress → review → done
-            ↑          ↑           │
-            │          └───────────┘  (reviewer rejects)
+            ↑                   │
+            └───────────────────┘  (reviewer rejects)
             │
          blocked → todo              (unblocked)
             ↓
@@ -282,7 +282,7 @@ backlog → todo → in_progress → review → done
 | `cancelled` | Will not be done (terminal) |
 
 Reverse transitions:
-- `review → in_progress` — reviewer rejects, agent reworks
+- `review → todo` — reviewer rejects, agent reworks
 - `blocked → todo` — unblocked, agent picks up again
 
 ### This Loop

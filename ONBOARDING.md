@@ -157,8 +157,8 @@ If `git push` fails: `git pull --rebase`, re-check, retry (max 3).
 ### Task states
 ```
 backlog → todo → in_progress → review → done
-            ↑          ↑           │
-            │          └───────────┘
+            ↑                   │
+            └───────────────────┘
          blocked → todo
 ```
 
