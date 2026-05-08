@@ -51,12 +51,3 @@ This repo runs a Ralph loop that extracts widget specifications from `workspace/
 - **Spec Writer** — reads approved draft, writes `workspace/spec-alpha/{widget}.md`
 
 See `WORKFLOW.md` for per-agent workflows and `setup.md` for full design.
-
-## Editing Guidelines
-
-- This is a spec repo. Changes to `README.md` change the protocol definition.
-- JSON schemas in the spec docs are normative — keep entity examples consistent across all docs.
-- The four GNAP entities (Agent, Task, Run, Message) are intentionally minimal. Resist adding new protocol-level entities.
-- `examples/` should always be valid instances of the schemas defined in the spec.
-- Operational concerns (budget enforcement, stall detection, concurrency control) belong in AgentHQ, not the protocol.
-- `workspace/` is a git submodule-style clone — commit changes to it separately and push to `iobuhov/web-widgets`.
