@@ -61,6 +61,8 @@ Take the lowest `priority` number (highest priority).
    3. What part of behavior can be documented from this file?
    4. Is it user-facing?
    5. What new did you learn from this file?
+
+   Each answer must be concise — no more than two paragraphs and 256 words total per file section.
 4. When all source files have sections → set task state to `review`
 
 **Follow-up run (Reviewer directive received):**
