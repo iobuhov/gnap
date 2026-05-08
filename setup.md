@@ -98,7 +98,7 @@ One section per source file. Each section answers:
 ### Reviewer
 - Triggered when `extract/{widget}` task enters `review` state
 - Reads draft critically — checks that every source file is covered and all 5 questions have enough context to produce a spec
-- If gaps found: sends `directive` message to Worker, task returns to `in_progress`
+- If gaps found: sends `directive` message to Worker, task returns to `todo`
 - If satisfied: creates `synthesize/{widget}` GNAP task and marks `extract/{widget}` as `done`
 - Max 10 Worker-Reviewer cycles per widget; if consensus not reached → task → `blocked`, human agent flagged via GNAP message
 

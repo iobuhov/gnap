@@ -93,9 +93,7 @@ in the `to` array. Mark yourself in `read_by` and commit.
 
 Read files in `workspace/.gnap/tasks/`. Filter for tasks where:
 - Your `id` is in `assigned_to`
-- `state` is `in_progress` or `todo`
-
-Pick `in_progress` tasks first. Fall back to `todo` if none are in progress.
+- `state` is `todo`
 
 ### Step 5: Complete your first check-in
 
@@ -132,8 +130,8 @@ From now on, follow this loop on your configured `heartbeat_sec` interval:
 1. git pull --rebase  (in workspace/)
 2. Read workspace/.gnap/agents.json  → am I active?
 3. Read workspace/.gnap/messages/    → anything for me?
-4. Read workspace/.gnap/tasks/       → tasks assigned to me in "in_progress" or "todo"?
-5. Pick in_progress task first, fall back to highest priority todo task
+4. Read workspace/.gnap/tasks/       → tasks assigned to me in "todo"?
+5. Pick highest priority todo task
 6. Set state → "in_progress" → commit + push
 7. Do the work
 8. Record run in workspace/.gnap/runs/ → commit + push

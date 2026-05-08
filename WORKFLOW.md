@@ -99,7 +99,7 @@ worker: update EX-001 — addressed reviewer gaps in editorConfig section
 3. Read workspace/.gnap/tasks/       → find tasks in "review" state
 4. Read workspace/_tmp/{widget}/draft.md
 5. Evaluate draft (see criteria below)
-6. If gaps found → send directive to Worker, return task to "in_progress"
+6. If gaps found → send directive to Worker, return task to "todo"
 7. If satisfied  → create synthesize task, mark extract task "done"
 8. If cycle limit reached → mark task "blocked", alert human
 9. commit + push
@@ -130,7 +130,7 @@ Create `workspace/.gnap/messages/{N}.json` (`{N}` = max existing message id + 1)
 }
 ```
 
-Set task `state` back to `in_progress` and increment a `review_cycles` counter in the task file.
+Set task `state` back to `todo` and increment `review_cycles` in the task file.
 
 ### If satisfied (consensus reached)
 
@@ -291,7 +291,7 @@ Reverse transitions:
 [extract/EX-NNN]
   todo → in_progress (Worker)
         → review (Worker, draft complete)
-        → in_progress (Reviewer returns for gaps)     ← up to 10 cycles
+        → todo (Reviewer returns for gaps)            ← up to 10 cycles
         → done (Reviewer satisfied)
         → blocked (10 cycles exceeded)
 
