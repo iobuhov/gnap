@@ -36,13 +36,13 @@ State lives in `workspace/.gnap/` and `workspace/_tmp/`. Each agent runs on a `/
 3. Read workspace/.gnap/messages/    → any directives for "worker"?
 4. Read workspace/.gnap/tasks/       → find in_progress task (priority) or todo task
 5. Set task state → "in_progress", commit + push
-6. Execute (see below)
+6. If directive found in step 3 → execute [Follow-up run], else → execute [First run]
 7. Set task state → "review", commit + push
 ```
 
 ### Execution
 
-**First run (no draft exists):**
+**[First run] — no directive in messages:**
 
 1. List all source files under `workspace/packages/pluggableWidgets/{widget}/`
 2. For each source file, check its imports. If a import points to a local workspace package — a package present in `workspace/packages/` — follow it and include that package's source files in the exploration as well. External npm packages (not found in `workspace/packages/`) are out of scope.
@@ -56,12 +56,12 @@ State lives in `workspace/.gnap/` and `workspace/_tmp/`. Each agent runs on a `/
    Each answer must be concise — no more than two paragraphs and 256 words total per file section.
 4. When all source files have sections → set task state to `review`
 
-**Follow-up run (Reviewer directive received):**
+**[Follow-up run] — directive found in messages:**
 
 1. Read the directive message — it lists specific files or sections needing deeper analysis
 2. Re-read the named files, update the relevant sections in `draft.md`
 3. Mark the directive message as `read_by: ["worker"]`, commit
-4. Post a status message confirming the gaps were addressed:
+4. Post a status message confirming the gaps were addressed (`{N}` = max existing message id + 1):
 
 ```json
 {
@@ -117,7 +117,7 @@ For each source file section in `draft.md`, verify:
 
 ### If gaps found
 
-Create `workspace/.gnap/messages/{N}.json`:
+Create `workspace/.gnap/messages/{N}.json` (`{N}` = max existing message id + 1):
 
 ```json
 {
@@ -134,7 +134,7 @@ Set task `state` back to `in_progress` and increment a `review_cycles` counter i
 
 ### If satisfied (consensus reached)
 
-1. Create `workspace/.gnap/tasks/SY-{N}.json` (synthesize task):
+1. Create `workspace/.gnap/tasks/SY-{N}.json` (synthesize task, `{N}` = max existing SY task id + 1):
 
 ```json
 {
@@ -153,7 +153,7 @@ Set task `state` back to `in_progress` and increment a `review_cycles` counter i
 ```
 
 2. Set extract task `state` → `done`
-3. Post a status message notifying the Spec Writer:
+3. Post a status message notifying the Spec Writer (`{N}` = max existing message id + 1):
 
 ```json
 {
@@ -199,7 +199,7 @@ reviewer: block EX-001 — 10 cycles exceeded, human review required
 ```
 1. git pull --rebase  (in workspace/)
 2. Read workspace/.gnap/agents.json  → confirm status: active
-3. Read workspace/.gnap/tasks/       → find todo synthesize task
+3. Read workspace/.gnap/tasks/       → find in_progress synthesize task (priority) or todo synthesize task
 4. Set task state → "in_progress", commit + push
 5. Execute (see below)
 6. Set task state → "done", commit + push
