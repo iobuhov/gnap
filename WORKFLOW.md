@@ -26,7 +26,6 @@ State lives in `workspace/.gnap/` and `workspace/_workspace/`. Each agent runs o
 ## Worker
 
 **Heartbeat:** 300s  
-**Handles:** `extract/{widget}` tasks  
 **Writes:** `workspace/_workspace/{widget}/draft.md`
 
 ### Trigger
@@ -98,7 +97,6 @@ worker: update EX-001 — addressed reviewer gaps in editorConfig section
 ## Reviewer
 
 **Heartbeat:** 300s  
-**Watches:** `extract/{widget}` tasks in `review` state  
 **Writes:** directives to Worker, creates `synthesize/{widget}` tasks
 
 ### Trigger
@@ -208,7 +206,6 @@ reviewer: block EX-001 — 10 cycles exceeded, human review required
 ## Spec Writer
 
 **Heartbeat:** 300s  
-**Handles:** `synthesize/{widget}` tasks  
 **Writes:** `workspace/spec-alpha/{widget}.md`
 
 ### Trigger
