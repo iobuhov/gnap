@@ -132,6 +132,7 @@ From now on, follow this loop on your configured `heartbeat_sec` interval:
 7. Do the work
 8. Record run in workspace/.gnap/runs/ → commit + push
 9. Set task state → "done" or "review" → commit + push
+10. (optional) Add a comment to the task describing what was done and any notable findings
 ```
 
 If `git push` fails: `git pull --rebase`, re-check, retry (max 3).
