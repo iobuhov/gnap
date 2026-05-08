@@ -162,7 +162,7 @@ Set task `state` back to `in_progress` and increment a `review_cycles` counter i
   "to": ["spec-writer"],
   "at": "{ISO-timestamp}",
   "type": "info",
-  "text": "EX-001: draft approved for accordion-web. Synthesize task SY-001 is ready for pickup."
+  "text": "EX-001: draft approved for accordion-web. Synthesize task SY-001 is todo."
 }
 ```
 
@@ -199,7 +199,7 @@ reviewer: block EX-001 — 10 cycles exceeded, human review required
 ```
 1. git pull --rebase  (in workspace/)
 2. Read workspace/.gnap/agents.json  → confirm status: active
-3. Read workspace/.gnap/tasks/       → find ready synthesize task
+3. Read workspace/.gnap/tasks/       → find todo synthesize task
 4. Set task state → "in_progress", commit + push
 5. Execute (see below)
 6. Set task state → "done", commit + push
