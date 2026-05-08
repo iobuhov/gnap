@@ -280,6 +280,34 @@ spec-writer: done SY-001 — spec written for accordion-web
 
 ## Task State Reference
 
+### GNAP States
+
+```
+backlog → ready → in_progress → review → done
+            ↑          ↑           │
+            │          └───────────┘  (reviewer rejects)
+            │
+         blocked → ready              (unblocked)
+            ↓
+         cancelled
+```
+
+| State | Meaning |
+|-------|---------|
+| `backlog` | Not yet prioritized |
+| `ready` | Prioritized, waiting for agent to pick up |
+| `in_progress` | Agent is working on it |
+| `review` | Work done, waiting for review |
+| `done` | Completed (terminal) |
+| `blocked` | Cannot proceed (see `blocked_reason`) |
+| `cancelled` | Will not be done (terminal) |
+
+Reverse transitions:
+- `review → in_progress` — reviewer rejects, agent reworks
+- `blocked → ready` — unblocked, agent picks up again
+
+### This Loop
+
 ```
 [extract/EX-NNN]
   ready → in_progress (Worker)
