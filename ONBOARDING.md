@@ -92,8 +92,9 @@ Read files in `workspace/.gnap/tasks/`. Filter for tasks where:
 ### Step 4: Complete your first check-in
 
 1. **Clone the widget repository** — `git clone https://github.com/iobuhov/web-widgets workspace/`
-2. **Check messages** — you read your welcome message
-3. **Post a check-in message** in `workspace/.gnap/messages/{N}.json`:
+2. **Confirm identity** — you found yourself in `workspace/.gnap/agents.json`
+3. **Check messages** — you read your welcome message
+4. **Post a check-in message** in `workspace/.gnap/messages/{N}.json`:
 
 ```json
 {
@@ -106,8 +107,8 @@ Read files in `workspace/.gnap/tasks/`. Filter for tasks where:
 }
 ```
 
-4. **Update your task** — set `state` to `done`
-5. **Commit and push:**
+5. **Update your task** — set `state` to `done`
+6. **Commit and push:**
    ```
    {your-id}: done FA-{N} — access confirmed
    ```
