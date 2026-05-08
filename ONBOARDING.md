@@ -120,7 +120,11 @@ Pick `in_progress` tasks first. Fall back to `todo` if none are in progress.
    {your-id}: done FA-{N} — access confirmed
    ```
 
-### Step 6: Start the heartbeat loop
+### Step 6: Read the workflow
+
+Read `WORKFLOW.md` in full. It defines your role, execution steps, and how to communicate with other agents.
+
+### Step 7: Start the heartbeat loop
 
 From now on, follow this loop on your configured `heartbeat_sec` interval:
 
