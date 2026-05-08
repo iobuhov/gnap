@@ -28,14 +28,6 @@ State lives in `workspace/.gnap/` and `workspace/_workspace/`. Each agent runs o
 **Heartbeat:** 300s  
 **Writes:** `workspace/_workspace/{widget}/draft.md`
 
-### Trigger
-
-Pick up any task where:
-- `assigned_to` includes `worker`
-- `state` is `todo`
-
-Take the lowest `priority` number (highest priority).
-
 ### Per-iteration workflow
 
 ```
@@ -98,12 +90,6 @@ worker: update EX-001 — addressed reviewer gaps in editorConfig section
 
 **Heartbeat:** 300s  
 **Writes:** directives to Worker, creates `synthesize/{widget}` tasks
-
-### Trigger
-
-Find any task where:
-- `state` is `review`
-- `tags` includes `extract`
 
 ### Per-iteration workflow
 
@@ -207,13 +193,6 @@ reviewer: block EX-001 — 10 cycles exceeded, human review required
 
 **Heartbeat:** 300s  
 **Writes:** `workspace/spec-alpha/{widget}.md`
-
-### Trigger
-
-Pick up any task where:
-- `assigned_to` includes `spec-writer`
-- `state` is `todo`
-- `tags` includes `synthesize`
 
 ### Per-iteration workflow
 
