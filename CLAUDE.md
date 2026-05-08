@@ -46,7 +46,7 @@ Git  (Transport)             — push/pull/commit = the message bus
 
 This repo runs a Ralph loop that extracts widget specifications from `workspace/` (iobuhov/web-widgets). Three agent roles coordinate via `workspace/.gnap/`:
 
-- **Worker** — explores widget source files, fills `workspace/_workspace/{widget}/draft.md`
+- **Worker** — explores widget source files, fills `workspace/_tmp/{widget}/draft.md`
 - **Reviewer** — reviews drafts, sends directives to Worker, creates synthesize tasks on consensus
 - **Spec Writer** — reads approved draft, writes `workspace/spec-alpha/{widget}.md`
 

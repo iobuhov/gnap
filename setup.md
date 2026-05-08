@@ -31,7 +31,7 @@ The AI infers hidden behavior and usage from source files. The process is source
 ## Artifacts
 
 ```
-_workspace/{widget}/
+_tmp/{widget}/
   draft.md          ← research document (findings per source file)
 
 spec-alpha/
@@ -91,7 +91,7 @@ One section per source file. Each section answers:
 
 ### Worker
 - Explores widget source files one by one
-- Fills `_workspace/{widget}/draft.md` — one section per file, answering the 5 questions
+- Fills `_tmp/{widget}/draft.md` — one section per file, answering the 5 questions
 - Receives `directive` messages from Reviewer, addresses gaps, updates draft
 - Owns the `extract/{widget}` GNAP task
 
@@ -104,7 +104,7 @@ One section per source file. Each section answers:
 
 ### Spec Writer
 - Picks up `synthesize/{widget}` GNAP task
-- Reads `_workspace/{widget}/draft.md`
+- Reads `_tmp/{widget}/draft.md`
 - Produces clean, formal `spec-alpha/{widget}.md`
 - Specialization: formal language and spec format preservation
 - Marks `synthesize/{widget}` task `done`
@@ -154,7 +154,7 @@ Each iteration:
 5. Updates task state, pushes
 6. Loop continues until no `todo` tasks remain
 
-**State lives in `.gnap/` and `_workspace/` — fresh agent context each iteration.**
+**State lives in `.gnap/` and `_tmp/` — fresh agent context each iteration.**
 
 ---
 

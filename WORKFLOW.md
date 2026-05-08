@@ -19,14 +19,14 @@ This document describes the workflow for each agent role in the spec-extraction 
       reads draft, writes clean spec-alpha/{widget}.md
 ```
 
-State lives in `workspace/.gnap/` and `workspace/_workspace/`. Each agent runs on a `/loop` heartbeat — fresh context per iteration, no cross-widget memory.
+State lives in `workspace/.gnap/` and `workspace/_tmp/`. Each agent runs on a `/loop` heartbeat — fresh context per iteration, no cross-widget memory.
 
 ---
 
 ## Worker
 
 **Heartbeat:** 300s  
-**Writes:** `workspace/_workspace/{widget}/draft.md`
+**Writes:** `workspace/_tmp/{widget}/draft.md`
 
 ### Per-iteration workflow
 
@@ -46,7 +46,7 @@ State lives in `workspace/.gnap/` and `workspace/_workspace/`. Each agent runs o
 
 1. List all source files under `workspace/packages/pluggableWidgets/{widget}/`
 2. For each source file, check its imports. If a import points to a local workspace package — a package present in `workspace/packages/` — follow it and include that package's source files in the exploration as well. External npm packages (not found in `workspace/packages/`) are out of scope.
-3. For each source file (widget and local dependencies), read it and create a section in `_workspace/{widget}/draft.md` answering:
+3. For each source file (widget and local dependencies), read it and create a section in `workspace/_tmp/{widget}/draft.md` answering:
    1. What is the purpose of this file?
    2. What kind of logic is described in this file?
    3. What part of behavior can be documented from this file?
@@ -97,7 +97,7 @@ worker: update EX-001 — addressed reviewer gaps in editorConfig section
 1. git pull --rebase  (in workspace/)
 2. Read workspace/.gnap/agents.json  → confirm status: active
 3. Read workspace/.gnap/tasks/       → find tasks in "review" state
-4. Read _workspace/{widget}/draft.md
+4. Read workspace/_tmp/{widget}/draft.md
 5. Evaluate draft (see criteria below)
 6. If gaps found → send directive to Worker, return task to "in_progress"
 7. If satisfied  → create synthesize task, mark extract task "done"
@@ -146,7 +146,7 @@ Set task `state` back to `in_progress` and increment a `review_cycles` counter i
   "created_by": "reviewer",
   "created_at": "{ISO-timestamp}",
   "updated_at": "{ISO-timestamp}",
-  "desc": "Read _workspace/{widget}/draft.md and produce a clean spec at spec-alpha/{widget}.md.",
+  "desc": "Read workspace/_tmp/{widget}/draft.md and produce a clean spec at workspace/spec-alpha/{widget}.md.",
   "parent": "EX-{N}",
   "tags": ["synthesize", "{widget}"]
 }
@@ -207,7 +207,7 @@ reviewer: block EX-001 — 10 cycles exceeded, human review required
 
 ### Execution
 
-1. Read `_workspace/{widget}/draft.md` in full
+1. Read `workspace/_tmp/{widget}/draft.md` in full
 2. Synthesize findings into `spec-alpha/{widget}.md` using the template below
 3. Use formal, precise language — this is a specification, not a summary
 4. Every claim must be traceable to a finding in the draft
