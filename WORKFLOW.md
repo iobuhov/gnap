@@ -28,40 +28,39 @@ State lives in `workspace/.gnap/` and `workspace/_tmp/`. Each agent runs on a `/
 **Heartbeat:** 300s  
 **Writes:** `workspace/_tmp/{widget}/draft.md`
 
-### Per-iteration workflow
+### [First run] — no directive in messages
 
 ```
 1. git pull --rebase  (in workspace/)
 2. Read workspace/.gnap/agents.json  → confirm status: active
 3. Read workspace/.gnap/tasks/       → find todo task assigned to "worker"
 4. Set task state → "in_progress", commit + push
-5. Read workspace/.gnap/messages/    → any directives for "worker"?
-6. If directive found in step 5 → execute [Follow-up run], else → execute [First run]
-7. Set task state → "review", commit + push
-```
-
-### Execution
-
-**[First run] — no directive in messages:**
-
-1. List all source files under `workspace/packages/pluggableWidgets/{widget}/`
-2. For each source file, check its imports. If a import points to a local workspace package — a package present in `workspace/packages/` — follow it and include that package's source files in the exploration as well. External npm packages (not found in `workspace/packages/`) are out of scope.
-3. For each source file (widget and local dependencies), read it and create a section in `workspace/_tmp/{widget}/draft.md` answering:
+5. Read workspace/.gnap/messages/    → no directives for "worker"
+6. List all source files under workspace/packages/pluggableWidgets/{widget}/
+7. For each source file, check imports — follow local workspace packages (present in workspace/packages/); skip external npm packages
+8. For each source file, create a section in workspace/_tmp/{widget}/draft.md answering:
    1. What is the purpose of this file?
    2. What kind of logic is described in this file?
    3. What part of behavior can be documented from this file?
    4. Is it user-facing?
    5. What new did you learn from this file?
+   Each section: max 2 paragraphs, 256 words total.
+9. Set task state → "review", commit + push
+```
 
-   Each answer must be concise — no more than two paragraphs and 256 words total per file section.
-4. When all source files have sections → set task state to `review`
+### [Follow-up run] — directive found in messages
 
-**[Follow-up run] — directive found in messages:**
-
-1. Read the directive message — it lists specific files or sections needing deeper analysis
-2. Re-read the named files, update the relevant sections in `draft.md`
-3. Mark the directive message as `read_by: ["worker"]`, commit
-4. Post a status message confirming the gaps were addressed (`{N}` = max existing message id + 1):
+```
+1. git pull --rebase  (in workspace/)
+2. Read workspace/.gnap/agents.json  → confirm status: active
+3. Read workspace/.gnap/tasks/       → find todo task assigned to "worker"
+4. Set task state → "in_progress", commit + push
+5. Read workspace/.gnap/messages/    → directive found for "worker"
+6. Read the directive — it lists specific files or sections needing deeper analysis
+7. Re-read the named files, update the relevant sections in workspace/_tmp/{widget}/draft.md
+8. Mark the directive message as read_by: ["worker"], commit
+9. Post a status message confirming gaps were addressed ({N} = max existing message id + 1):
+```
 
 ```json
 {
@@ -74,7 +73,9 @@ State lives in `workspace/.gnap/` and `workspace/_tmp/`. Each agent runs on a `/
 }
 ```
 
-5. Set task state back to `review`
+```
+10. Set task state → "review", commit + push
+```
 
 ### Commit convention
 
