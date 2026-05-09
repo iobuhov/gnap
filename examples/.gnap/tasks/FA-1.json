@@ -5,12 +5,12 @@
   "created_by": "ori",
   "assigned_to": ["carl"],
   "reviewer": "mayak",
-  "state": "in_progress",
+  "state": "todo",
   "priority": 1,
   "due": "2026-03-19",
   "tags": ["Sales"],
   "created_at": "2026-03-12T09:00:00Z",
-  "updated_at": "2026-03-12T10:30:00Z",
+  "updated_at": "2026-05-09T07:09:00Z",
   "comments": [
     {
       "by": "carl",
